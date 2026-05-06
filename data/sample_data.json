@@ -1,0 +1,24 @@
+{
+  "sample_job_description": "Senior Full Stack Engineer - Python, React, System Design. We're looking for a talented engineer with 5+ years of experience to build scalable systems. You'll work with Docker, Kubernetes, and AWS. Strong system design skills required.",
+  "sample_resume": {
+    "name": "John Doe",
+    "email": "john@example.com",
+    "skills": ["Python", "JavaScript", "React", "Node.js", "PostgreSQL", "MongoDB", "Git", "REST API"],
+    "experience": [
+      {
+        "title": "Backend Engineer",
+        "company": "TechCorp",
+        "start_date": "2021-01-01",
+        "end_date": "present",
+        "description": "Built scalable APIs using Python and FastAPI"
+      },
+      {
+        "title": "Junior Developer",
+        "company": "StartupXYZ",
+        "start_date": "2019-06-01",
+        "end_date": "2020-12-31",
+        "description": "Developed web applications with JavaScript and React"
+      }
+    ]
+  }
+}
