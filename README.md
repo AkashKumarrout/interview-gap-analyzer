@@ -6,7 +6,15 @@ An intelligent platform that analyzes your resume against job descriptions, iden
 
 ---
 
-## 🌟 Features
+## � Live Demo
+
+**➡️ Try it now:** [Interview Gap Analyzer](https://share.streamlit.io/AkashKumarrout/interview-gap-analyzer) (Deploy after this guide)
+
+**📚 GitHub:** [github.com/AkashKumarrout/interview-gap-analyzer](https://github.com/AkashKumarrout/interview-gap-analyzer)
+
+---
+
+## �🌟 Features
 
 ✅ **Resume & Job Analysis** - Upload your resume and job description to get instant analysis  
 ✅ **Skills Gap Identification** - Get a detailed breakdown of what skills you need to learn  
