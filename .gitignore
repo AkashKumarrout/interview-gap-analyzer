@@ -11,7 +11,8 @@ build/
 venv/
 .idea/
 .vscode/
-.streamlit/
+.streamlit/secrets.toml
+.streamlit/cache/
 *.log
 .coverage
 htmlcov/
