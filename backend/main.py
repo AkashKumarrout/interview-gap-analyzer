@@ -32,10 +32,28 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize modules
-ai_analyzer = AIAnalyzer()
-resume_processor = ResumeProcessor()
-job_matcher = JobMatcher(ai_analyzer)
+# Initialize modules (lazy loaded to prevent startup errors)
+ai_analyzer = None
+resume_processor = None
+job_matcher = None
+
+def get_ai_analyzer():
+    global ai_analyzer
+    if ai_analyzer is None:
+        ai_analyzer = AIAnalyzer()
+    return ai_analyzer
+
+def get_resume_processor():
+    global resume_processor
+    if resume_processor is None:
+        resume_processor = ResumeProcessor()
+    return resume_processor
+
+def get_job_matcher():
+    global job_matcher
+    if job_matcher is None:
+        job_matcher = JobMatcher(get_ai_analyzer())
+    return job_matcher
 
 
 # Request/Response Models
@@ -89,30 +107,33 @@ async def analyze_gap(
     Analyze skills and experience gaps between resume and job description
     """
     try:
+        ai = get_ai_analyzer()
+        jm = get_job_matcher()
+        
         # Extract skills from job description
-        required_skills = ai_analyzer.extract_skills(job_request.job_description)
+        required_skills = ai.extract_skills(job_request.job_description)
         
         # Find skill gaps
-        skill_gaps = job_matcher.find_skill_gaps(
+        skill_gaps = jm.find_skill_gaps(
             resume_skills=resume_data.skills,
             required_skills=required_skills
         )
         
         # Find experience gaps
-        experience_gaps = job_matcher.find_experience_gaps(
+        experience_gaps = jm.find_experience_gaps(
             resume_experience=resume_data.experience,
             job_description=job_request.job_description
         )
         
         # Generate learning roadmap
-        learning_roadmap = ai_analyzer.generate_learning_roadmap(
+        learning_roadmap = ai.generate_learning_roadmap(
             gaps=skill_gaps + experience_gaps,
             target_role=job_request.job_title,
             timeframe_weeks=4
         )
         
         # Generate mock interview questions
-        mock_questions = ai_analyzer.generate_mock_questions(
+        mock_questions = ai.generate_mock_questions(
             job_description=job_request.job_description,
             skill_gaps=skill_gaps,
             num_questions=10
@@ -151,7 +172,8 @@ async def get_interview_feedback(feedback_request: InterviewFeedbackRequest) -> 
     Provide feedback on interview answer with suggestions for improvement
     """
     try:
-        feedback = ai_analyzer.evaluate_interview_answer(
+        ai = get_ai_analyzer()
+        feedback = ai.evaluate_interview_answer(
             question=feedback_request.question,
             answer=feedback_request.your_answer,
             question_type=feedback_request.question_type
@@ -180,7 +202,8 @@ async def generate_learning_plan(
     Generate a structured learning plan for skill gaps
     """
     try:
-        plan = ai_analyzer.generate_learning_roadmap(
+        ai = get_ai_analyzer()
+        plan = ai.generate_learning_roadmap(
             gaps=skill_gaps,
             target_role=target_role,
             timeframe_weeks=weeks_available
@@ -190,8 +213,8 @@ async def generate_learning_plan(
             "target_role": target_role,
             "timeframe_weeks": weeks_available,
             "learning_plan": plan,
-            "resources": ai_analyzer.get_learning_resources(skill_gaps),
-            "milestones": ai_analyzer.create_milestones(skill_gaps, weeks_available)
+            "resources": ai.get_learning_resources(skill_gaps),
+            "milestones": ai.create_milestones(skill_gaps, weeks_available)
         }
     
     except Exception as e:
@@ -208,7 +231,8 @@ async def suggest_projects(
     Suggest portfolio projects to build skills and close gaps
     """
     try:
-        projects = ai_analyzer.suggest_projects(
+        ai = get_ai_analyzer()
+        projects = ai.suggest_projects(
             skills=skill_gaps,
             tech_stack=tech_stack,
             difficulty=difficulty_level
