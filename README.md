@@ -8,11 +8,14 @@ An intelligent platform that analyzes your resume against job descriptions, iden
 
 ## 🚀 Live Demo
 
-The backend is deployed and live on Railway:
+**👉 Try the live app: https://interview-gap-analyzer-mzr26umrzf2d4ayf689fze.streamlit.app**
+
+The full stack is deployed:
 
 | What | URL |
 | --- | --- |
-| 🔌 Live API | https://interview-gap-analyzer-production.up.railway.app |
+| 🌐 **Live web app (Streamlit)** | https://interview-gap-analyzer-mzr26umrzf2d4ayf689fze.streamlit.app |
+| 🔌 Live API (Railway) | https://interview-gap-analyzer-production.up.railway.app |
 | 📘 Interactive API docs (Swagger UI) | https://interview-gap-analyzer-production.up.railway.app/docs |
 | ❤️ Health check | https://interview-gap-analyzer-production.up.railway.app/health |
 
