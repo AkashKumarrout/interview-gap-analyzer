@@ -6,9 +6,35 @@ An intelligent platform that analyzes your resume against job descriptions, iden
 
 ---
 
-## � Live Demo
+## 🚀 Live Demo
 
-**➡️ Try it now:** [Interview Gap Analyzer](https://share.streamlit.io/AkashKumarrout/interview-gap-analyzer) (Deploy after this guide)
+The backend is deployed and live on Railway:
+
+| What | URL |
+| --- | --- |
+| 🔌 Live API | https://interview-gap-analyzer-production.up.railway.app |
+| 📘 Interactive API docs (Swagger UI) | https://interview-gap-analyzer-production.up.railway.app/docs |
+| ❤️ Health check | https://interview-gap-analyzer-production.up.railway.app/health |
+
+**Try the API right now from your terminal:**
+
+```bash
+curl https://interview-gap-analyzer-production.up.railway.app/health
+```
+
+Or open `/docs` in your browser and click **Try it out** on any endpoint — no setup, no install.
+
+> 💡 **Demo mode:** The hosted backend runs without an OpenAI key, so it returns realistic mock responses out of the box. To enable live AI, set the `OPENAI_API_KEY` environment variable on your own deployment (see [Deployment](#-deployment)).
+
+### Deploy your own frontend in 2 minutes
+
+[![Deploy with Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/deploy?repository=AkashKumarrout/interview-gap-analyzer&branch=main&mainModule=frontend/app.py)
+
+After clicking deploy, paste this into the app's **Secrets** field:
+
+```toml
+BACKEND_URL = "https://interview-gap-analyzer-production.up.railway.app"
+```
 
 **📚 GitHub:** [github.com/AkashKumarrout/interview-gap-analyzer](https://github.com/AkashKumarrout/interview-gap-analyzer)
 
