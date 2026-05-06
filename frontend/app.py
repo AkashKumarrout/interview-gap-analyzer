@@ -6,6 +6,7 @@ Interactive UI for analyzing interview readiness and generating learning plans
 import streamlit as st
 import requests
 import json
+import os
 from typing import Dict, List
 import time
 
@@ -39,8 +40,14 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# Backend URL
-BACKEND_URL = "http://localhost:8000"
+# Backend URL: read from Streamlit secrets (cloud) or env var (local), fallback to localhost
+def _get_backend_url():
+    try:
+        return st.secrets["BACKEND_URL"]
+    except Exception:
+        return os.getenv("BACKEND_URL", "http://localhost:8000")
+
+BACKEND_URL = _get_backend_url()
 
 # Initialize session state
 if "page" not in st.session_state:
