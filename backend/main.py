@@ -252,7 +252,14 @@ async def suggest_projects(
 @app.get("/health")
 async def health_check():
     """Health check endpoint"""
-    return {"status": "healthy", "service": "interview-gap-analyzer"}
+    ai_key_set = bool(os.getenv("OPENAI_API_KEY") or os.getenv("ANTHROPIC_API_KEY"))
+    return {
+        "status": "healthy",
+        "service": "interview-gap-analyzer",
+        "ai_mode": "live" if ai_key_set else "demo",
+        "openai_key_present": bool(os.getenv("OPENAI_API_KEY")),
+        "anthropic_key_present": bool(os.getenv("ANTHROPIC_API_KEY")),
+    }
 
 
 if __name__ == "__main__":
